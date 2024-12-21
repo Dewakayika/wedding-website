@@ -9,19 +9,22 @@
   <body class="mx-3 overflow-x-hidden">
     <div class="fixed w-full h-screen z-[-1]"></div>
 
-    <div class="portfolio h-screen content-center items-center justify-center">
+    <!-- Hero -->
+    <div class="portfolio hero h-screen content-center items-center justify-center">
       <div class="hero-content relative w-full h-96 flex flex-col justify-center items-center">
-        <div class="absolute bg-black opacity-30 w-full h-full"></div>
+        <div class="absolute bg-black opacity-40 w-full h-full"></div>
         <img class="absolute inset-0 w-full h-full object-cover -z-10 bg-black" src="/public/image/6-2.jpg" alt="#" />
         <p class="font-serif z-20 text-2xl tracking-tight text-white w-full text-center">eternal love studio.</p>
         <p class="font-sans z-20 text-xs text-white w-full text-center">BALI, INDONESIA</p>
       </div>
     </div>
+
+    <!-- Portfolio -->
     <div class="section h-fit w-full">
       <div class="portfolio">
-        <div class="row bg-yellow-100 h-screen flex flex-row justify-between items-center content-center">
-          <div class="col h-full w-full">
-            <img class="h-screen object-cover" src="/public/image/6-2.jpg" alt="" />
+        <div class="row bg-white h-screen flex flex-row justify-between items-center content-center">
+          <div class="py-3 col h-screen w-full flex justify-center items-center">
+            <img class="h-full object-cover cursor-pointer" src="/public/image/6-2.jpg" alt="" />
           </div>
           <div class="col h-full w-full flex flex-col justify-center px-5 gap-5">
             <p class="font-serif text-2xl">Taylor & Taylor</p>
@@ -30,15 +33,41 @@
         </div>
       </div>
       <div class="portfolio">
-        <div class="bg-yellow-100 row h-screen flex flex-row justify-between items-center content-center">
+        <div class="bg-white row h-screen flex flex-row justify-between items-center content-center">
+          <div class="py-3 h-screen w-full">
+            <div class="absolute bg-black opacity-40 w-full h-full z-[1]"></div>
+            <img class="absolute h-full w-full object-cover z-0" src="/public/image/6-2.jpg" alt="" />
+            <div class="flex flex-col text-white justify-center items-center h-full">
+              <p class="font-serif text-2xl z-20">Taylor & Taylor</p>
+              <p class="font-sans z-20">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nesciunt sint eveniet soluta facere minus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio">
+        <div class="row bg-white h-screen flex flex-row justify-between items-center content-center">
+          <div class="py-3 col h-screen w-full flex justify-center items-center">
+            <img class="h-full object-cover" src="/public/image/6-2.jpg" alt="" />
+          </div>
           <div class="col h-full w-full flex flex-col justify-center px-5 gap-5">
             <p class="font-serif text-2xl">Taylor & Taylor</p>
             <p class="font-sans">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nesciunt sint eveniet soluta facere minus.</p>
           </div>
-          <div class="col h-full w-full">
-            <img class="h-screen object-cover" src="/public/image/6-2.jpg" alt="" />
-          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer w-full h-screen">
+      <div class="footer-content w-full h-screen flex flex-col justify-center items-center">
+        <div class="show-more text-serif">
+          <a class="rounded-xl py-2 px-3 outline outline-gray-700 outline-2 hover:underline" href="">Show More Portfolio</a>
+        </div>
+
+        <p class="pt-52 px-5 font-serif text-xl text-center w-5/6 italic">
+          eternal love studio is Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptatem facere velit quod officiis rem sapiente quo inventore, exercitationem, tempora, nostrum debitis impedit sit eum?
+        </p>
+        <p class="pt-52 font-extrabold">BLOG, INSTAGRAM, NEWS, CONTACT</p>
       </div>
     </div>
 
@@ -73,14 +102,15 @@
 
           if (index > 0) {
             gsap.to(portfolios[index - 1], {
-              yPercent: -20, // Move up by 100%
+              yPercent: -10, // Move up by 100%
               ease: "none",
               scrollTrigger: {
                 trigger: portfolio,
                 start: "top center",
                 end: "top top",
-                scrub: index * 0.7, // Speed for upward movement
+                scrub: index * 0.6, // Speed for upward movement
                 invalidateOnRefresh: true,
+                ease: 50,
               },
             });
           }
@@ -93,6 +123,7 @@
             pin: true,
             pinSpacing: false,
             scrub: (index + 1) * 0.5,
+            onLeaveBack: () => ScrollTrigger.refresh(true),
           });
         });
 
@@ -108,7 +139,8 @@
           },
         });
 
-        // Text reveal with staggered animation
+        const footer = document.querySelector(".footer");
+        footer.style.marginTop = "30vh"; // Ensure space for pinned elements
       });
     </script>
     <!-- <script>
