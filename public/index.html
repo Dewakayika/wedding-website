@@ -6,13 +6,220 @@
     <title>Document</title>
     <link rel="stylesheet" href="/public/css/style.css" />
   </head>
-  <body class="mx-3">
-    <div class="hero h-screen content-center items-center justify-center">
+  <body class="mx-3 overflow-x-hidden">
+    <div class="fixed w-full h-screen z-[-1]"></div>
+
+    <!-- Hero -->
+    <div class="portfolio hero h-screen content-center items-center justify-center">
       <div class="hero-content relative w-full h-96 flex flex-col justify-center items-center">
-        <img class="absolute inset-0 w-full h-full object-cover -z-10 bg-black" src="" alt="#" />
-        <p class="font-serif text-xl text-white w-full text-center">eternal love studio.</p>
-        <p class="font-sans text-xs text-white w-full text-center">BALI, INDONESIA</p>
+        <div class="absolute bg-black opacity-40 w-full h-full"></div>
+        <img class="absolute inset-0 w-full h-full object-cover -z-10 bg-black" src="/public/image/6-2.jpg" alt="#" />
+        <p class="font-serif z-20 text-2xl tracking-tight text-white w-full text-center">eternal love studio.</p>
+        <p class="font-sans z-20 text-xs text-white w-full text-center">BALI, INDONESIA</p>
       </div>
     </div>
+
+    <!-- Portfolio -->
+    <div class="section h-fit w-full">
+      <div class="portfolio">
+        <div class="row bg-white h-screen flex flex-row justify-between items-center content-center">
+          <div class="py-3 col h-screen w-full flex justify-center items-center">
+            <img class="h-full object-cover cursor-pointer" src="/public/image/6-2.jpg" alt="" />
+          </div>
+          <div class="col h-full w-full flex flex-col justify-center px-5 gap-5">
+            <p class="font-serif text-2xl">Taylor & Taylor</p>
+            <p class="font-sans">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nesciunt sint eveniet soluta facere minus.</p>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio">
+        <div class="bg-white row h-screen flex flex-row justify-between items-center content-center">
+          <div class="py-3 h-screen w-full">
+            <div class="absolute bg-black opacity-40 w-full h-full z-[1]"></div>
+            <img class="absolute h-full w-full object-cover z-0" src="/public/image/6-2.jpg" alt="" />
+            <div class="flex flex-col text-white justify-center items-center h-full">
+              <p class="font-serif text-2xl z-20">Taylor & Taylor</p>
+              <p class="font-sans z-20">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nesciunt sint eveniet soluta facere minus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio">
+        <div class="row bg-white h-screen flex flex-row justify-between items-center content-center">
+          <div class="py-3 col h-screen w-full flex justify-center items-center">
+            <img class="h-full object-cover" src="/public/image/6-2.jpg" alt="" />
+          </div>
+          <div class="col h-full w-full flex flex-col justify-center px-5 gap-5">
+            <p class="font-serif text-2xl">Taylor & Taylor</p>
+            <p class="font-sans">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit nesciunt sint eveniet soluta facere minus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer w-full h-screen">
+      <div class="footer-content w-full h-screen flex flex-col justify-center items-center">
+        <div class="show-more text-serif">
+          <a class="rounded-xl py-2 px-3 outline outline-gray-700 outline-2 hover:underline" href="">Show More Portfolio</a>
+        </div>
+
+        <p class="pt-52 px-5 font-serif text-xl text-center w-5/6 italic">
+          eternal love studio is Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptatem facere velit quod officiis rem sapiente quo inventore, exercitationem, tempora, nostrum debitis impedit sit eum?
+        </p>
+        <p class="pt-52 font-extrabold">BLOG, INSTAGRAM, NEWS, CONTACT</p>
+      </div>
+    </div>
+
+    <script src="js/gsap.min.js"></script>
+    <script src="js/TextPlugin.min.js"></script>
+    <script src="js/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollSmoother.min.js"></script>
+    <script>
+      // Register GSAP Plugins
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Section fade-in and pinning
+        const portfolios = gsap.utils.toArray(".portfolio");
+
+        portfolios.forEach((portfolio, index) => {
+          // Fade-in effect
+          gsap.fromTo(
+            portfolio,
+            { opacity: 1, y: 0 }, // Initial state
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              scrollTrigger: {
+                trigger: portfolio,
+                start: "top 100%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+
+          if (index > 0) {
+            gsap.to(portfolios[index - 1], {
+              yPercent: -10, // Move up by 100%
+              ease: "none",
+              scrollTrigger: {
+                trigger: portfolio,
+                start: "top center",
+                end: "top top",
+                scrub: index * 0.6, // Speed for upward movement
+                invalidateOnRefresh: true,
+                ease: 50,
+              },
+            });
+          }
+          // Pin the section for a scrolling effect
+          ScrollTrigger.create({
+            trigger: portfolio,
+            start: "top top",
+            end: "+=30%",
+            delay: 10,
+            pin: true,
+            pinSpacing: false,
+            scrub: (index + 1) * 0.5,
+            onLeaveBack: () => ScrollTrigger.refresh(true),
+          });
+        });
+
+        // Background parallex effect
+        gsap.to(".background", {
+          yPercent: 0,
+          ease: 50,
+          scrollTrigger: {
+            trigger: ".background",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        const footer = document.querySelector(".footer");
+        footer.style.marginTop = "30vh"; // Ensure space for pinned elements
+      });
+    </script>
+    <!-- <script>
+      // Register GSAP Plugins
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const portfolios = gsap.utils.toArray(".portfolio");
+
+        // Initialize sections
+        gsap.set(portfolios, {
+          position: "relative",
+          zIndex: (i) => portfolios.length - i, // Higher z-index for earlier sections
+        });
+
+        portfolios.forEach((portfolio, i) => {
+          // Create timeline for each section
+          let tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: portfolio,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1.2,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // Animate all previous sections
+          portfolios.slice(0, i).forEach((prevSection, index) => {
+            tl.to(
+              prevSection,
+              {
+                y: `-${100 + (i - index) * 10}vh`, // Incrementally move up previous sections
+                ease: "power1.inOut",
+              },
+              0
+            );
+          });
+
+          // Pin the current section
+          ScrollTrigger.create({
+            trigger: portfolio,
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: false,
+            anticipatePin: 1,
+          });
+
+          // Parallax effect for background elements if they exist
+          const bgElements = portfolio.querySelectorAll(".background-element");
+          if (bgElements.length) {
+            bgElements.forEach((bg) => {
+              gsap.to(bg, {
+                y: "20%",
+                ease: "none",
+                scrollTrigger: {
+                  trigger: portfolio,
+                  scrub: 1.5,
+                  start: "top bottom",
+                  end: "bottom top",
+                },
+              });
+            });
+          }
+        });
+
+        // Optimize performance
+        ScrollTrigger.config({ limitCallbacks: true });
+
+        // Refresh ScrollTrigger on resize
+        let resizeTimeout;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
+            ScrollTrigger.refresh(true);
+          }, 100);
+        });
+      });
+    </script> -->
   </body>
 </html>
