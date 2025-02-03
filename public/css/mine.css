@@ -1,32 +1,51 @@
 
-  .background {
+.background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     z-index: -1;
-  }
-  
-  .section {
+}
+
+.section {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
     border-bottom: 1px solid #ccc;
-  }
+}
 
-  
-  
-  .text-reveal {
+.text-reveal {
     margin: 100px auto;
     max-width: 800px;
     font-size: 1.5rem;
     line-height: 2rem;
-  }
-  
-  .line {
+}
+
+.line {
     overflow: hidden;
-  }
-  
+}
+
+iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  height: 1080px;
+  margin: 0 auto;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
