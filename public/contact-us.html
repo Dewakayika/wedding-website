@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="css/style.css"/>
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
         <!-- AOS CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
     </head>
     <body class="bg-gray-100">
@@ -23,7 +24,10 @@
                     <div class="flex flex-col justify-between lg:py-5">
                         <div>
                             <h2
-                                class="text-3xl font-serif font-bold leading-tight text-black sm:text-4xl lg:leading-tight lg:text-5xl" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">It’s time to build something exciting!</h2>
+                                class="text-3xl font-serif font-bold leading-tight text-black sm:text-4xl lg:leading-tight lg:text-5xl"
+                                data-aos="fade-up"
+                                data-aos-delay="300"
+                                data-aos-duration="1000">It’s time to build something exciting!</h2>
 
                             <img
                                 class="relative z-10 max-w-xs mx-auto -mb-16 md:hidden"
@@ -36,7 +40,11 @@
                                 alt=""/>
                         </div>
 
-                        <div class="hidden md:mt-auto md:block" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+                        <div
+                            class="hidden md:mt-auto md:block"
+                            data-aos="fade-up"
+                            data-aos-delay="500"
+                            data-aos-duration="1000">
                             <div class="flex items-center">
                                 <svg
                                     class="w-6 h-6 text-yellow-400"
@@ -100,7 +108,11 @@
                         </div>
                     </div>
 
-                    <div class="lg:pl-12" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1000">
+                    <div
+                        class="lg:pl-12"
+                        data-aos="fade-up"
+                        data-aos-delay="800"
+                        data-aos-duration="1000">
                         <div class="overflow-hidden bg-gray-100 rounded-md">
                             <div class="p-6 sm:p-10">
                                 <h3 class="text-3xl font-semibold text-black">Get in Touch with Us</h3>
@@ -241,30 +253,36 @@
                     </div>
                 </div>
             </div>
-            <!-- Tambahkan elemen modal untuk alert -->
+
+            <!-- Alert container -->
             <div
-                id="ios-alert"
-                class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-                <div class="bg-white rounded-2xl shadow-xl w-80 p-5 text-center">
-                    <p id="alert-message" class="text-gray-800 text-lg font-medium"></p>
-                    <button
-                        onclick="closeAlert()"
-                        class="mt-4 w-full py-2 text-blue-500 font-semibold">
-                        OK
-                    </button>
-                </div>
+                id="alert-container"
+                class="fixed top-5 right-5 z-50 hidden bg-black text-white p-4 rounded-lg shadow-lg flex items-center space-x-3">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-white"
+                    fill="none"
+                    viewbox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"/>
+                </svg>
+                <span id="alert-message" class="font-semibold">Yeeayy! Your message has been sent successfully!</span>
+                <button onclick="closeAlert()" class="text-white ml-4">&times;</button>
             </div>
+
         </section>
 
     </body>
 
     <!-- AOS JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
     <script>
-    AOS.init(); // Inisialisasi AOS
+        AOS.init(); // Inisialisasi AOS
     </script>
-
 
     <script>
         (function () {
@@ -279,42 +297,67 @@
                 emailjs
                     .sendForm("service_gfcsno9", "template_493jqoj", this)
                     .then(function (response) {
-                        showAlert("Your message has been sent successfully! 🎉");
+                        showAlert("Your message has been sent successfully!", "bg-green-500");
                         document
                             .getElementById("contact-form")
                             .reset();
                     }, function (error) {
-                        showAlert("Failed to send message, please try again later. ❌");
+                        showAlert("Failed to send message, please try again later.", "bg-red-500");
                     });
             }
         );
 
-        function showAlert(message) {
-            let alertBox = document.getElementById("ios-alert");
-            document
-                .getElementById("alert-message")
-                .innerText = message;
+        function showAlert(message, colorClass) {
+            const alertContainer = document.getElementById("alert-container");
+            const alertMessage = document.getElementById("alert-message");
 
-            alertBox
+            alertMessage.textContent = message;
+            alertContainer
                 .classList
                 .remove("hidden");
+            alertContainer
+                .classList
+                .add(colorClass, "opacity-0");
+
+            // Fade-in animation
             setTimeout(() => {
-                alertBox
+                alertContainer
+                    .classList
+                    .remove("opacity-0");
+                alertContainer
                     .classList
                     .add("opacity-100");
-            }, 10); // Delay sedikit agar transisi berjalan
+            }, 100);
+
+            // Fade-out animation after 4 seconds
+            setTimeout(() => {
+                alertContainer
+                    .classList
+                    .remove("opacity-100");
+                alertContainer
+                    .classList
+                    .add("opacity-0");
+                setTimeout(() => {
+                    alertContainer
+                        .classList
+                        .add("hidden");
+                }, 500);
+            }, 4000);
         }
 
         function closeAlert() {
-            let alertBox = document.getElementById("ios-alert");
-            alertBox
+            const alertContainer = document.getElementById("alert-container");
+            alertContainer
                 .classList
                 .remove("opacity-100");
+            alertContainer
+                .classList
+                .add("opacity-0");
             setTimeout(() => {
-                alertBox
+                alertContainer
                     .classList
                     .add("hidden");
-            }, 300); // Delay sesuai durasi animasi
+            }, 500);
         }
     </script>
 
