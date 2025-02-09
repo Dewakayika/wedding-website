@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eternal Love Studio - More Portfolio</title>
     <link rel="stylesheet" href="css/style.css" />
+    <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
   </head>
   <body class="relative z-[1]">
     <div class="absolute w-full" style="z-index: 2">
@@ -12,9 +15,9 @@
     </div>
 
     <!-- Content -->
-    <div class="absolute grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 z-0">
+    <div class="absolute grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 z-0" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
       <!-- Video Item -->
-      <a href="/public/detail-portfolio.html">
+      <a href="/public/detail-portfolio.html" >
       <div class="relative overflow-hidden h-[calc(100vh-5rem)] cursor-pointer group">
         <video src="image/top_3.mp4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" autoplay muted loop></video>
         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -33,7 +36,7 @@
       </div>
       </a>
 
-      <a href="/public/detail-portfolio.html">
+      <a href="/public/detail-portfolio.html" >
       <div class="relative overflow-hidden h-[calc(100vh-5rem)] cursor-pointer group">
         <video src="image/top_1_rev.mp4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" autoplay muted loop></video>
         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -42,7 +45,7 @@
       </div>
       </a>
 
-      <a href="/public/detail-portfolio.html">
+      <a href="/public/detail-portfolio.html" >
       <div class="relative overflow-hidden h-[calc(100vh-5rem)] cursor-pointer group">
         <video src="image/jonathan kyra.mp4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" autoplay muted loop></video>
         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -51,7 +54,7 @@
       </div>
       </a>
 
-      <a href="/public/detail-portfolio.html">
+      <a href="/public/detail-portfolio.html" >
       <div class="relative overflow-hidden h-[calc(100vh-5rem)] cursor-pointer group">
         <video src="image/Adam Sharee.mp4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" autoplay muted loop></video>
         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -60,7 +63,7 @@
       </div>
       </a>
 
-      <a href="/public/detail-portfolio.html">
+      <a href="/public/detail-portfolio.html" >
       <div class="relative overflow-hidden h-[calc(100vh-5rem)] cursor-pointer group">
         <video src="image/Jenna Matt.mp4" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" autoplay muted loop></video>
         <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -72,4 +75,11 @@
       
     </div>
   </body>
+
+  <!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init(); // Inisialisasi AOS
+</script>
+
 </html>
